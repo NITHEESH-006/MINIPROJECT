@@ -1,0 +1,42 @@
+<section class=" " style="background-color: #f5ececf0; width: 100%; padding-top:250px;padding-bottom:250px;">
+    <div class="container table-responsive">
+        <table class="table mt-5" id="productsTable">
+  <thead>
+    <tr>
+      {{!-- <th scope="col">No</th> --}}
+      <th scope="col">USERID</th>
+      {{!-- <th scope="col">PRICE</th> --}}
+      <th scope="col">NAME</th>
+      <th scope="col">EMAIL ID</th>
+      {{!-- <th>IMAGE</th> --}}
+      <th>MESSAGE</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each response}}   
+    <tr>
+      
+      <td>{{this.userId}}</td>
+      <td>{{this.firstName}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.message}}</td>
+      <td>
+          <a href="/replay/{{this.userId}}" class="btn btn-danger">REPLAY</a>
+      </td>
+    </tr>
+    </tr>
+   {{/each}}
+  </tbody>
+  <td>
+          <a href="/view-replays" class="btn btn-danger">VIEW REPLAYS</a>
+      </td>
+</table>
+    </div>
+</section>
+
+
+<script> //product searching
+  $(function () {
+    $('#productsTable').DataTable();
+} );
+</script>

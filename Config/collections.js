@@ -1,0 +1,11 @@
+module.exports={
+    CRICKET_COLLECTION:'cricket',
+    FOOTBALL_COLLECTION:'football',
+    OTHER_COLLECTION:'other',
+    ADMIN_COLLECTION:'admins',
+    USER_COLLECTION:'users',
+    CONTACT_COLLECTION:'contact',
+    REPLAY_COLLECTION:'replays',
+    EXCLUSIVEARTICLE_COLLECTION:'exart',
+    EXCLUSIVEVIDEO_COLLECTION:'exvideo',
+}

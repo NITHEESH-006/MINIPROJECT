@@ -1,0 +1,45 @@
+
+    <header class="" style="background-color: #050000f0;position: fixed;width: 100%;z-index: 2;">
+    <div class="container-fluid d-flex justify-content-between align-items-center py-2" style="padding-right: 80px;">
+        <div class="col-6 col-md-8"> 
+            <img  src="/images/logoname1.png " style="height: 6em;" class="img-fluid" >
+            
+        </div>
+        <div class="col-6 col-md-4 my-auto p-2">
+          <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+              <button class="navbar-toggler bg-warning ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button> 
+              {{#if admin.loggedIn}}
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/" style="color:white;font-weight:bold">HOME</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/all-news" style="color:white;font-weight:bold">ALL NEWS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/all-exclusive" style="color:white;font-weight:bold">ALL EXCLUSIVE</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/all-users" style="color:white;font-weight:bold">ALL USERS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/logout" style="color:white;font-weight:bold">LOGOUT</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="/all-contact" style="color:rgb(252, 249, 249);font-weight:bold">OTHERS</a>
+                  </li>
+                </ul>
+              </div>
+
+              {{/if}}
+            </div>
+          </nav>
+          
+        </div>
+    </div>
+</header>
+

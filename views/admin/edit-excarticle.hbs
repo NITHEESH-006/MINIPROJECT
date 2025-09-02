@@ -1,0 +1,47 @@
+<section class="" style="padding-top: 150px; padding-bottom:50px;">
+ 
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">EDIT ARTICLE</h2>
+                <form action="/edit-excarticle/{{exca._id}}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">ARTICLE TITLE:</label>
+                        <input type="text" id="title" name="title" class="form-control" value="{{exca.title}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">AUTHOR:</label>
+                        <input type="text" id="author" name="author" class="form-control" value="{{exca.author}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">DATE:</label>
+                        <input type="text" id="date" name="date" class="form-control" value="{{exca.date}}" >
+                    </div>
+                    <div class="form-group">
+                        <label for="description">DESCRIPTION:</label>
+                        <textarea id="description" name="description" class="form-control">{{exca.description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image:</label>
+                        <img src="/images/{{exca._id}}.jpg" style="width: 100px;heiht:auto" id="imgView" class="p-2">    {{!-- //for display the existing image before edit --}}
+                        <input type="file" id="image" name="image" class="form-control" onchange="viewImage(event)" >
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success mt-4">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+
+
+
+

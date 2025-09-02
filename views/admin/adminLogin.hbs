@@ -1,0 +1,53 @@
+<section class="" style="padding-top: 150px; padding-bottom: 200px;">
+ 
+<h1 class="text-success text-center">
+    ADMIN LOGIN
+</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 ">
+            <div class="card shadow-lg rounded-4 " style="width: 100%;">
+                <div class="card-body p-4">
+                    <form method="post" action="/adminLogin">
+                        {{#if loginErr}}
+                        <p class="error text-danger text-center">{{loginErr}}</p>
+                        {{/if}}
+                        <div class="mb-3 pt-5">
+                            <label for="email">
+                                Email
+                            </label>
+                            <input type="email" 
+                                   class="form-control" 
+                                   id="email" 
+                                   name="email"        
+                                   placeholder="Email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password">
+                                Password
+                            </label>
+                            <input type="password" 
+                                   class="form-control" 
+                                   id="password" 
+                                   name="password"     
+                                   placeholder="Password" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary float-end">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>
+
+{{!-- restricting back navigate to login page again once logged --}}
+
+<script>
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>

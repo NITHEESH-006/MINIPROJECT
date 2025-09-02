@@ -1,0 +1,45 @@
+<section class=" " style="background-color: #f5ececf0; width: 100%; padding-top:250px;padding-bottom:250px;">
+    <div class="container table-responsive">
+        <table class="table mt-5" id="productsTable">
+  <thead>
+    <tr>
+      
+       <th scope="col">USERID</th>
+      <th scope="col">NAME</th>
+      <th scope="col">PASSWORD</th>
+      <th scope="col">EMAIL ID</th>
+      <th scope="col">CATEGORY</th>
+      <th>OPTIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each response}} 
+    <tr>
+      <td>{{this._id}}</td>
+      <td>{{this.name}}</td>
+      <td>{{this.Password}}</td>
+      <td>{{this.Email}}</td>
+      
+      {{#if this.isPremium}}
+      <td>PREMIUM</td>
+      {{else}}
+      <td>NORMAL</td>
+      {{/if}}
+  
+      <td>
+          <a href="/deleteUser/{{this._id}}" class="btn btn-danger" 
+          onclick="return confirm('ARE YOU WANT TO DELETE {{this.name}}?')">BAN</a>
+      </td>
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>
+
+
+<script> //product searching
+  $(function () {
+    $('#productsTable').DataTable();
+} );
+</script>

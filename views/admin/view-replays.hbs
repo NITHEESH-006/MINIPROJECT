@@ -1,0 +1,31 @@
+<section class=" " style="background-color: #f5ececf0; width: 100%; padding-top:250px;padding-bottom:250px;">
+    <div class="container table-responsive">
+        <table class="table mt-5" id="productsTable">
+  <thead>
+    <tr>
+      
+      <th scope="col">DOCUMENT ID</th>
+      <th scope="col">USERID</th>
+      <th>MESSAGE</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each response}}    
+    <tr>
+      <td>{{this._id}}</td>
+      <td>{{this.userId}}</td>
+      <td>{{this.msg.message}}</td>
+    </tr>
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>
+
+
+<script> //product searching
+  $(function () {
+    $('#productsTable').DataTable();
+} );
+</script>

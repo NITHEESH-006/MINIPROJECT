@@ -1,0 +1,20 @@
+<section class="" style="padding-top: 150px;">
+        
+        <div class="container">
+
+        <h3>{{article.title}}</h3><br>
+        <h6>{{article.author}}     <br>{{article.date}}  </h6> <img src="/images/{{article._id}}.jpg" class="img-fluid" alt="" style="height: 12em;width: 25em;"><br>
+        <h6>{{article.description}}</h6>
+
+        <div class="row">
+           <div>
+          <a href="/edit-article/{{article._id}}" class="btn btn-primary">EDIT</a>
+          <a href="/delete-article/{{article._id}}" class="btn btn-danger" 
+          onclick="return confirm('ARE YOU WANT TO DELETE {{article.title}}?')">DELETE</a>
+           </div>
+        </div>
+
+        </div>
+
+
+    </section>

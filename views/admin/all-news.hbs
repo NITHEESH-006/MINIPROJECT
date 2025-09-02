@@ -1,0 +1,33 @@
+
+<section class=" " style="background-color: #050000f0; width: 100%; padding-top:150px;padding-bottom:50px;">
+  <marquee width="65%" direction="left" scrollamount="20"><h1
+      class="text-center"
+      style="color: whitesmoke;"
+    >ALL NEWS</h1>...</h1></marquee>
+
+  <div class="container">
+    <div class="row">
+            {{#each news}}
+                    <div class="col-12 col-sm-6 col-md-4 pt-2 ">
+                      <a href="/article/{{this._id}}" style="text-decoration: none;;">
+                      <div class="card  text-center p-3">
+                    
+                    <img src="/images/{{this._id}}.jpg" class="card-img-top img-fluid" alt="..." style="height: 16em;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{this.title}}</h5>
+                       <p class="text-end">{{this.date}}</p>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+            {{/each}}
+            
+            
+        
+      </div>
+    
+    
+
+  </div>
+
+</section>
