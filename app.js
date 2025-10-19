@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var adminRouter = require('./routes/admin');
-// var usersRouter = require('./routes/users');
+ var usersRouter = require('./routes/users');
 
 var hbs=require('express-handlebars')
 var fileUpload=require('express-fileupload')  
@@ -22,15 +22,15 @@ app.engine('hbs', hbs.engine({
     layoutsDir: __dirname + '/views/layout/',
     partialsDir: __dirname + '/views/partials/',
     
-  //   helpers: {   
-  //     eq: function (a, b) {  //
-  //         return a === b;
-  //     } ,
-  //     isBookmarked: function(artId, bookmarks) {
-  //       // Check if the article is in the user's bookmarks
-  //       return bookmarks.some(bookmark => bookmark._id.toString() === artId.toString());
-  //     }
-  // },
+    helpers: {   
+      eq: function (a, b) {  //
+          return a === b;
+      } ,
+      isBookmarked: function(artId, bookmarks) {
+        // Check if the article is in the user's bookmarks
+        return bookmarks.some(bookmark => bookmark._id.toString() === artId.toString());
+      }
+  },
     
   runtimeOptions: {
         allowProtoPropertiesByDefault: true,
@@ -39,13 +39,13 @@ app.engine('hbs', hbs.engine({
 }));
 
 app.use(logger('dev'));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(fileUpload());
+app.use(fileUpload());
 
 app.use(fileUpload({
   limits: { fileSize: 100 * 1024 * 1024 }, // upload limit to 100MB
@@ -79,7 +79,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', adminRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
