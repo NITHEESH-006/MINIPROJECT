@@ -1,0 +1,19 @@
+<section class=" " style="background-color: #b99c9cf0; width: 100%; padding-top:250px;padding-bottom:300px;">
+    <div class="container table-responsive">
+        <table class="table mt-5" id="productsTable">
+  <thead>
+    <tr>
+      <th>MESSAGES</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each response}}   
+    <tr>
+      <td>{{this.msg.message}}</td>
+    </tr>
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>

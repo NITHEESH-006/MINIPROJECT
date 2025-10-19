@@ -1,0 +1,168 @@
+ <section class="" style="padding-top: 150px; padding-bottom:100px;">
+
+  <div class="container">
+
+    <h3>{{article.title}}</h3><br />
+    <h6>{{article.author}} <br />{{article.date}} </h6>
+    <img
+      src="/images/{{article._id}}.jpg"
+      class="img-fluid"
+      alt=""
+      style="height: 12em;width: 25em;"
+    /><br />
+
+    <div class="d-flex justify-content-between align-items-center mt-3 px-2">
+      
+      <div class="d-flex gap-3 mt-2 mb-3">
+
+        <a id="like" style="cursor: pointer;">
+  <i class="{{#if isLiked}}bi bi-heart-fill text-danger{{else}}bi bi-heart{{/if}}"></i><span id="like-count" class="badge bg-primary" onclick="likecount('{{article._id}}')">{{likecount}} Liked!</span>
+</a>
+
+
+        <a id="bookmark" style="cursor: pointer;">
+          <i class="{{#if isBookmarked}}bi bi-bookmark-check-fill{{else}}bi bi-bookmark{{/if}}"></i>
+        </a>
+        <a
+          href="https://api.whatsapp.com/send?text=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on WhatsApp"
+        >
+          <i class="fab fa-whatsapp fa-lg text-success"></i>
+        </a>
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on Facebook"
+        >
+          <i class="fab fa-facebook fa-lg text-primary"></i>
+        </a>
+        <a
+          href="https://twitter.com/intent/tweet?url=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on Twitter"
+        >
+          <i class="fab fa-twitter fa-lg text-info"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on LinkedIn"
+        >
+          <i class="fab fa-linkedin fa-lg text-primary"></i>
+        </a>
+      </div>
+    </div>
+
+    <h6>{{article.description}}</h6>
+
+  </div>
+
+</section>
+
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const bookmarkBtn = document.getElementById("bookmark");
+    if (bookmarkBtn) {
+      bookmarkBtn.addEventListener("click", () => {
+        const articleId = "{{article._id}}";
+        fetch(`/users/bookmark/${articleId}`, {
+          method: 'POST'  
+        })
+          .then(response => response.json())
+          .then(data => {
+            const icon = bookmarkBtn.querySelector('i');
+            if (data.added) {
+              icon.className = 'bi bi-bookmark-check-fill';  
+            } else if (data.removed) {
+              icon.className = 'bi bi-bookmark';  
+            }
+          })
+          .catch(err => console.error("Bookmark error:", err));
+      });
+    }
+  });
+
+
+  //liked
+
+
+
+
+ document.addEventListener("DOMContentLoaded", () => {
+    const likedBtn = document.getElementById("like");
+    if (likedBtn) {
+      likedBtn.addEventListener("click", () => {
+        const articleId = "{{article._id}}";
+        fetch(`/users/liked/${articleId}`, {
+          method: 'POST'  
+        })
+          .then(response => response.json())
+          .then(data => {
+            const icon = likedBtn.querySelector('i');
+            if (data.added) {
+              icon.className = 'bi bi-heart-fill text-danger';  
+            } else if (data.removed) {
+              icon.className = 'bi bi-heart';  
+            }
+          })
+          .catch(err => console.error("liked error:", err));
+      });
+    }
+  }); 
+
+
+
+
+
+</script>  
+
+
+{{!-- 
+function likecount(id) {
+    $.ajax({
+        url: '/article/' + id,   // Using string concatenation for the URL
+        method: 'GET',
+        success: (response) => {
+            if (response.likecount !== undefined) {
+                // Update the like count dynamically
+                $('#like-count').html(response.likecount + ' Liked!');
+            }
+        },
+        error: (err) => {
+            console.error('Error updating like count:', err);
+        }
+    });
+} 
+
+
+
+
+
+////
+{{!-- 
+function likecount(id) {
+  $.ajax({
+    url: '/users/likecount/' + id,  // updated route!
+    method: 'GET',
+    success: (response) => {
+      if (response.likecount !== undefined) {
+        $('#like-count').html(response.likecount + ' Liked!');
+      }
+    },
+    error: (err) => {
+      console.error('Error updating like count:', err);
+    }
+  });
+} --}}
+
+
+
+--}}
+
+ 
+
+ 

@@ -1,0 +1,44 @@
+
+    <section class=" trending p-4 pt-5   bg-white">
+        <br>
+        <h1 class="text-center mt-5 p-4">GET IN TOUCH</h1>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-12">
+                <form method="post" action="/users/contact">
+  <input type="hidden" name="userId" value="{{user._id}}" />
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">First Name</label>
+      <input type="text" class="form-control" id="inputEmail4" name="firstName" placeholder="first name" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Last Name</label>
+      <input type="text" class="form-control" id="inputPassword4" name="lastName" placeholder="last name" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Email</label>
+    <input type="email" class="form-control" id="inputAddress" name="email" placeholder="email" required>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Message</label>
+    <textarea class="form-control" name="message" cols="30" rows="10" id="inputAddress2" placeholder="Type Your Message here.." required></textarea>
+  </div>
+  <div class="form-group text-center">
+    <button type="submit" class="btn btn-primary mt-2" style="width: 100%;">Submit</button>
+  </div>
+
+</form>
+<a href="/users/view-messages">
+  <div class="form-group text-center">
+    <button type=""  class="btn btn-danger mt-3" style="width: 100%;">VIEW MESSAGES</button>
+  </div>
+  </a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>

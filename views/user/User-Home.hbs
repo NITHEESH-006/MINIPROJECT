@@ -1,0 +1,131 @@
+
+
+<section class=" home" style="padding-top: 150px;width: 100%;">
+    <div class="container">
+    <div class="row align-items-center">
+        <div class="logo col-md-6">
+            <img src="images/logo1.png" class="img-fluid">
+        </div>
+        
+        <div class="menu align-items-center pt-5 col-md-6">  
+       
+
+
+
+            <!--chatgpt responsive version-->
+            <section class="carousel">
+              <div class="container">
+                <div class="row justify-content-center carousel__container">  
+            
+                  
+                  <div class="col-12 col-sm-6 col-md-4 mb-3 px-2">  
+                    <a href="/users/cricket-news" class="text-decoration-none d-block"> 
+                      <div class="carousel-item text-center w-100">  
+                        <img class="carousel-item__img img-fluid" src="images/cric.png" alt="cricket"> 
+                        <div class="carousel-item__details">
+                          <h6 class="carousel-item__details--title">CRICKET</h6>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+            
+                 
+                  <div class="col-12 col-sm-6 col-md-4 mb-3 px-2">
+                    <a href="/users/football-news" class="text-decoration-none d-block">
+                      <div class="carousel-item text-center w-100">
+                        <img class="carousel-item__img img-fluid" src="images/foot.png" alt="football">
+                        <div class="carousel-item__details">
+                          <h6 class="carousel-item__details--title">FOOTBALL</h6>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+            
+                 
+                  <div class="col-12 col-sm-6 col-md-4 mb-3 px-2">
+                    <a href="/users/other-news" class="text-decoration-none d-block">
+                      <div class="carousel-item text-center w-100">
+                        <img class="carousel-item__img img-fluid" src="images/oth.png" alt="others">
+                        <div class="carousel-item__details">
+                          <h6 class="carousel-item__details--title">OTHERS</h6>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+            
+                </div>
+              </div>
+            </section>
+           
+
+
+        </div>
+     </div>
+    </div>
+</section>
+
+<section style="background-color: #050000f0; width: 100%">
+  <div class="">
+    <marquee width="65%" direction="left" scrollamount="20"><h1 class="text-center" style="color: whitesmoke;">TRENDING TODAY...</h1></marquee>
+ 
+
+
+ <div id="customCarousel" class="custom-carousel pt-5">
+  <!-- Indicators -->
+  <div class="custom-carousel-indicators">
+    <button type="button" class="active" data-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Carousel inner -->
+  <!-- Carousel inner -->
+<div class="custom-carousel-inner">
+
+  <div class="custom-carousel-item active">
+    <a href="/users/article/{{cnews._id}}">
+    <img src="/images/{{cnews._id}}.jpg" class="d-block w-100" style="height: 30em;" alt="Chania">
+    <div class="custom-carousel-caption">
+      <h3>{{cnews.title}}</h3>
+      
+    </div>
+    </a>
+  </div>
+
+  <div class="custom-carousel-item">
+    <a href="/users/article/{{fnews._id}}">
+    <img src="/images/{{fnews._id}}.jpg" class="d-block w-100" style="height: 30em;" alt="Chicago">
+    <div class="custom-carousel-caption">
+      <h3>{{fnews.title}}</h3>
+      
+    </div>
+    </a>
+  </div>
+  <div class="custom-carousel-item">
+    <a href="/users/article/{{onews._id}}">
+    <img src="/images/{{onews._id}}.jpg" class="d-block w-100" style="height: 30em;" alt="New York">
+    <div class="custom-carousel-caption">
+      <h3>{{onews.title}}</h3>
+      
+    </div>
+    </a>
+  </div>
+</div>
+
+
+  <!-- Controls -->
+  <button class="custom-carousel-control-prev" onclick="moveCarousel('prev')"><
+    <span class="custom-carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="custom-carousel-control-next" onclick="moveCarousel('next')">>
+    <span class="custom-carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+  </div>
+</section>

@@ -1,0 +1,119 @@
+<section style="padding-top: 150px; padding-bottom: 350px;">
+  <div class="container">
+
+    <h3>Your Favourites Articles</h3><br />
+    {{#if liked.length}}
+      <div class="row">
+        {{#each liked}}
+          <div class="col-md-4 mb-4">
+            <a href="/users/article/{{this._id}}" style="text-decoration: none;">
+              <div class="card h-100 p-3">
+                <img src="/images/{{this._id}}.jpg" class="card-img-top" style="height: 200px;" alt="{{this.title}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{this.title}}</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p>You have no Favourites articles yet.</p>
+    {{/if}}
+
+    <hr class="my-5" />
+
+    {{#if user.isPremium}}
+      <h3>Your Favourites Exclusive Content</h3><br />
+      {{#if exliked.length}}
+        <div class="row">
+          {{#each exliked}}
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 p-3">
+                {{#if this.video}}
+                  <!-- Show Video -->
+                  <video controls style="width: 100%; height: 200px;">
+                    <source src="/videos/{{this._id}}.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  <a class="liked-btn" data-id="{{this._id}}" style="cursor: pointer;">
+                    <i class="{{#if isLiked}}bi bi-heart-fill text-danger{{else}}bi bi-heart{{/if}}"></i>
+                    <span id="like-count-{{this._id}}" class="badge bg-primary">{{this.likecount}} Liked!</span>
+                  </a>
+                  <a class="bookmark-btn" data-id="{{this._id}}" style="cursor: pointer;">
+                    <i class="{{#if isBookmarked}}bi bi-bookmark-check-fill{{else}}bi bi-bookmark{{/if}}"></i>
+                  </a>
+                {{else}}
+                  <img src="/images/{{this._id}}.jpg" class="card-img-top" style="height: 200px;" alt="{{this.title}}">
+                {{/if}}
+
+                {{#if this.video}}
+                  <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                  </div>
+                {{else}}
+                  <a href="/users/excarticle/{{this._id}}" style="text-decoration: none;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{this.title}}</h5>
+                    </div>
+                  </a>
+                {{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{else}}
+        <p>You have no Favourites exclusive articles/videos yet.</p>
+      {{/if}}
+    {{/if}}
+
+  </div>
+</section>
+
+<!-- Bookmark Toggle Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.bookmark-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const articleId = btn.getAttribute('data-id');
+        const icon = btn.querySelector('i');
+
+        fetch(`/users/bookmark/${articleId}`, {
+          method: 'POST'
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.added) {
+            icon.className = 'bi bi-bookmark-check-fill';
+          } else if (data.removed) {
+            icon.className = 'bi bi-bookmark';
+          }
+        })
+        .catch(err => console.error('Bookmark error:', err));
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.liked-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const articleId = btn.getAttribute('data-id');
+        const icon = btn.querySelector('i');
+
+        fetch(`/users/liked/${articleId}`, {
+          method: 'POST'
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.added) {
+            icon.className = 'bi bi-heart-fill text-danger';
+          }
+          else if (data.removed) {
+            icon.className = 'bi bi-heart';
+          }
+        })
+        .catch(err => console.error('Liked error:', err));
+      });
+    });
+  });
+</script>

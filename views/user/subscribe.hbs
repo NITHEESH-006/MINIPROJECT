@@ -1,0 +1,118 @@
+
+<section style="background-color: #b99c9cf0; width: 100%; padding-top:150px; padding-bottom:250px;">
+  <div class="container my-5">
+    <h2 class="text-center mb-4">Choose Your Plan</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-dark">
+            <thead class="bg-primary text-white">
+              <tr>
+                <th>Features</th>
+                <th>Free</th>
+                <th>Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>All News Categories</td>
+                <td><i class="bi bi-check-lg text-success"></i></td>
+                <td><i class="bi bi-check-lg text-success"></i></td>
+              </tr>
+              <tr>
+                <td>Exclusive Videos</td>
+                <td><i class="bi bi-x-lg text-danger"></i></td>
+                <td><i class="bi bi-check-lg text-success"></i></td>
+              </tr>
+              <tr>
+                <td>Ad-Free Experience</td>
+                <td><i class="bi bi-x-lg text-danger"></i></td>
+                <td><i class="bi bi-check-lg text-success"></i></td>
+              </tr>
+              <tr>
+                <td>Exclusive Interviews</td>
+                <td><i class="bi bi-x-lg text-danger"></i></td>
+                <td><i class="bi bi-check-lg text-success"></i></td>
+              </tr>
+              <tr>
+                <td>Early Access to News</td>
+                <td><i class="bi bi-x-lg text-danger"></i></td>
+                <td><i class="bi bi-check-lg text-success"></i></td>
+              </tr>
+              <tr>
+                <td>Price</td>
+                <td><span class="fw-bold text-success">Free</span></td>
+                <td><span class="fw-bold text-warning">₹999 / year</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="text-center mt-4">
+          <form id="premium-form">
+            <input type="text" name="userId" id="" value="{{user._id}}" hidden>
+            <button type="submit" class="btn btn-warning btn-lg">Upgrade to Premium</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Razorpay script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  document.getElementById("premium-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    try {
+      // Create Razorpay Order
+      const res = await fetch("/users/create-order", {
+        method: "POST",
+      });
+      const order = await res.json();
+
+      const options = {
+        key: 'rzp_test_q8OJJIyAJK5mkM', // Replace with your key_id
+        amount: order.amount,
+        currency: "INR",
+        name: "SportsRoundups",
+        description: "Annual Premium Subscription",
+        image: "/images/logo.png", // optional logo
+        order_id: order.id,
+        handler: async function (response) {
+          const verifyRes = await fetch("/users/verify-premium",  {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+  payment: response,
+  order,
+  userId: "{{user._id}}"
+}),
+
+          });
+          const verifyData = await verifyRes.json();
+          if (verifyData.status) {
+            window.location.href = "/users/exclusive";
+          } else {
+            alert("Payment Failed");
+          }
+        },
+        prefill: {
+          name: "{{user.name}}", // prefill from session
+          email: "{{user.email}}",
+          contact: "{{user.phone}}"
+        },
+        theme: {
+          color: "#F37254"
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      console.error("Payment error:", err);
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>

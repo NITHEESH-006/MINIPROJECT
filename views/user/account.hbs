@@ -1,0 +1,34 @@
+<section class=" " style="background-color: #050000f0; width: 100%; padding-top:200px;padding-bottom:50px;">
+<div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card bg-secondary shadow-lg rounded p-4">
+          <h2 class="text-center mb-4">Account Information</h2>
+          
+          <div class="mb-3">
+            <strong>Username:</strong> {{user.name}}
+          </div>
+          <div class="mb-3">
+            <strong>Email:</strong> {{user.Email}}
+          </div>
+          <div class="mb-3">
+            <strong>Membership:</strong>
+            {{#if user.isPremium}}
+              <span class="badge bg-warning text-dark">Premium</span>
+            {{else}}
+              <span class="badge bg-light text-dark">Free User</span>
+              <a href="/users/upgrade" style="text-decoration: none;" class="badge bg-success">Upgrade Now</a>
+            {{/if}}
+          </div>
+
+          <div class="text-center mt-4">
+            <a href="/users/bookmarkart" class="btn btn-outline-light me-2">View Bookmarks</a>
+            <a href="/users/logout" class="btn btn-danger">Logout</a>
+            <a href="/users/liked" class="btn btn-outline-light me-2">View Favourites</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

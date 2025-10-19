@@ -1,0 +1,161 @@
+<!-- views/user/exclusive.hbs -->
+<section style="padding-top: 150px; padding-bottom: 50px; background-color: #f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-5">Exclusive Zone</h2>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs justify-content-center mb-4" id="exclusiveTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="articles-tab" data-bs-toggle="tab" data-bs-target="#articles" type="button" role="tab" aria-controls="articles" aria-selected="false">
+          Exclusive Articles
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="videos-tab" data-bs-toggle="tab" data-bs-target="#videos" type="button" role="tab" aria-controls="videos" aria-selected="true">
+          Exclusive Videos
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="exclusiveTabsContent">
+      
+      <!-- Articles Section -->
+      <div class="tab-pane fade" id="articles" role="tabpanel" aria-labelledby="articles-tab">
+        <div class="row" style="justify-content: center;" >
+          {{#each exca}}
+      <div class="col-12 col-sm-6 col-md-4 mb-4" >
+        <a href="/users/excarticle/{{this._id}}" style="text-decoration: none;">
+        <div class="card h-100 p-3">
+          <img src="/images/{{this._id}}.jpg" class="card-img-top" style="height: 200px;" alt="{{this.title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="text-muted">{{this.author}} | {{this.date}}</p>
+            {{!-- <p class="card-text">{{this.description}}</p> --}}
+          </div>
+        </div>
+        </a>
+      </div>
+
+    {{/each}}
+        </div>
+      </div>
+
+      <!-- Videos Section -->
+      <div class="tab-pane fade show active" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+        <div class="row" style="justify-content: center;">
+          {{#each excv}}
+    
+      <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="card h-100 p-3">
+          <video controls style="height: 200px; width: 100%;">
+            <source src="/videos/{{this._id}}.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="card-body">
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="text-muted">{{this.author}} | {{this.date}}</p>
+
+            {{! share options }}
+    <div class="d-flex justify-content-between align-items-center mt-3 px-2">
+      
+            <div class="d-flex gap-3 mt-2 mb-3">
+          <a class="liked-btn" data-id="{{this._id}}" style="cursor: pointer;">
+  <i class="{{#if isLiked}}bi bi-heart-fill text-danger{{else}}bi bi-heart{{/if}}"></i><span id="like-count-{{this._id}}" class="badge bg-primary">{{this.likecount}} Liked!</span>
+</a>
+             <a class="bookmark-btn" data-id="{{this._id}}" style="cursor: pointer;">
+  <i class="{{#if isBookmarked}}bi bi-bookmark-check-fill{{else}}bi bi-bookmark{{/if}}"></i>
+</a>
+
+        <a
+          href="https://api.whatsapp.com/send?text=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on WhatsApp"
+        >
+          <i class="fab fa-whatsapp fa-lg text-success"></i>
+        </a>
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on Facebook"
+        >
+          <i class="fab fa-facebook fa-lg text-primary"></i>
+        </a>
+        <a
+          href="https://twitter.com/intent/tweet?url=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on Twitter"
+        >
+          <i class="fab fa-twitter fa-lg text-info"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourdomain.com/excarticle/{{this._id}}"
+          target="_blank"
+          title="Share on LinkedIn"
+        >
+          <i class="fab fa-linkedin fa-lg text-primary"></i>
+        </a>
+      </div>
+    </div>
+          </div>
+           </div>
+        </div>
+        
+    {{/each}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Bookmark Toggle Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.bookmark-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const articleId = btn.getAttribute('data-id');
+        const icon = btn.querySelector('i');
+
+        fetch(`/users/bookmark/${articleId}`, {
+          method: 'POST'
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.added) {
+            icon.className = 'bi bi-bookmark-check-fill';
+          } else if (data.removed) {
+            icon.className = 'bi bi-bookmark';
+          }
+        })
+        .catch(err => console.error('Bookmark error:', err));
+      });
+    });
+  });
+
+   document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.liked-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const articleId = btn.getAttribute('data-id');
+      const icon = btn.querySelector('i');
+
+      fetch(`/users/liked/${articleId}`, {
+        method: 'POST'
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.added) {
+          icon.className = 'bi bi-heart-fill text-danger';
+        }
+        else if (data.removed) {
+          icon.className = 'bi bi-heart';
+        }
+      })
+      .catch(err => console.error('Liked error:', err));
+    });
+  });
+});
+
+</script>
